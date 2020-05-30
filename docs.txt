@@ -67,11 +67,126 @@ dans package.json add
 
         pour connaitre request.body dans request post il faut installer body-parser
         npm install --save body-parser 
+        https://github.com/expressjs/body-parser
         ajouter dans server.js
         let bodyParser = require('body-parser');
         // parse application/x-www-form-urlencoded
         app.use(bodyParser.urlencoded({ extended: false }));
         // parse application/json
         app.use(bodyParser.json());
+
+        add validation to input 
+        Cas 1 :::
+        app.post('/', (request, response) => {
+          if(request.body.message === undefined || request.body.message === '')
+          {
+              response.render('pages/index',{error:"vous n'avez pas entrer un message"});
+          }
+        });
+        <% if(locals.error){%>
+        <div class="row" id="alert_box">
+            <div class="col s6 offset-s3">
+                <div class="card red darken-1">
+                    <div class="row">
+                        <div class="col s12 m10">
+                            <div class="card-content white-text">
+                                <p><%- locals.error -%></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }%>
+        ******************************************************
+        Cas 2 ::::: on utilise session
+        npm install --save express-session
+        https://github.com/expressjs/session
+        add in server 
+        app.use(session({
+        secret: 'hero',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false }
+        }));
+
+        app.get('/', (request, response) => {
+            if(request.session.error)
+            {
+                response.locals.error=request.session.error;
+                request.session.error=undefined;
+            }
+            response.render('pages/index', { test: 'salut' });
+        });
+
+        app.post('/', (request, response) => {
+            if(request.body.message === undefined || request.body.message === '')
+            {
+                request.session.error="vous n'avez pas entrer un message";
+                response.redirect('/');
+            }
+        });
+        ****Redifini les message aves des flash (middlewares)
+        ajouter dossier middlewares ->> flash.js
+        module.exports = function (request, response, next) {
+            if (request.session.flash) {
+                response.locals.flash=request.session.flash;
+                request.session.flash=undefined;
+                console.log("S1");
+            }
+
+            request.flash = function (type, content) {
+                if (request.session.flash === undefined) {
+                    request.session.flash = {};
+                }
+                request.session.flash[type] = content;
+                console.log("S2");
+            }
+            console.log("S3");
+            next();
+
+          }
+
+          dans server.js
+          app.use(require('./middlewares/flash'));
+
+          app.get('/', (request, response) => {
+                console.log(response.locals.flash);
+                response.render('pages/index', { test: 'salut' });
+            });
+
+            app.post('/', (request, response) => {
+                if (request.body.message === undefined || request.body.message === '') {
+                    request.flash('error',"vous n'avez pas entrer un message");
+                    response.redirect('/');
+                }else{
+                    request.flash('error',"message envoyé");
+                    response.redirect('/');
+                }
+            });
+
+            dans header.ejs
+            <% if(locals.flash && locals.flash.error){%>
+            <div class="row" id="alert_box">
+                <div class="col s6 offset-s3">
+                    <div class="card red darken-1">
+                        <div class="row">
+                            <div class="col s12 m10">
+                                <div class="card-content white-text">
+                                    <p><%- locals.flash.error -%></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }%>
+
+
+
+
+        
 
 

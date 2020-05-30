@@ -20,4 +20,36 @@
         </div>
     </nav>
     <div class="container">
-       
+        <% if(locals.flash && locals.flash.error){%>
+        <div class="row" id="alert_box">
+            <div class="col s6 offset-s3">
+                <div class="card red darken-1">
+                    <div class="row">
+                        <div class="col s12 m10">
+                            <div class="card-content white-text">
+                                <p><%- locals.flash.error -%></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }%>
+
+        <% if(locals.flash && locals.flash.success){%>
+            <div class="row" id="alert_box">
+                <div class="col s6 offset-s3">
+                    <div class="card teal darken-1">
+                        <div class="row">
+                            <div class="col s12 m10">
+                                <div class="card-content white-text">
+                                    <p><%- locals.flash.success -%></p>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }%>
