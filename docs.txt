@@ -33,7 +33,22 @@ dans package.json add
         });
 
         app.listen(8080);
-
+        cree dossier views ->pages -> index.ejs
         dans HTML pour afficher variable test :  <%= test %>
 
+        Add materialize css (statique):
+        cree dossier public and ajouter dossier materialize telecharge 
+        https://materializecss.com/getting-started.html
+
+        sur page index.ejs ajouter dans head 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="/assets/materialize/css/materialize.min.css" media="screen,projection" />
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript" src="/assets/materialize/js/materialize.min.js"></script>
+
+        sur server.js ajouter :
+        app.use('/assets',express.static('public'));
         
+
+
