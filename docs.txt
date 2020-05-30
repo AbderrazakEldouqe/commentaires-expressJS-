@@ -1,0 +1,15 @@
+git init 
+npm init 
+
+npm install --save nodemon
+
+dans package.json add 
+"scripts": {
+    "test": "yes",
+    "start": "nodemon server.js"
+  }
+  pour demmarer le serveur : npm run start
+
+
+  installer express : npm install --save express
+  

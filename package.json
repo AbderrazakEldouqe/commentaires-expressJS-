@@ -1,0 +1,20 @@
+{
+  "name": "commentaires",
+  "version": "1.0.0",
+  "description": "yes",
+  "main": "yes",
+  "scripts": {
+    "test": "yes",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "yes"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
+  }
+}
