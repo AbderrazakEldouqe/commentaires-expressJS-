@@ -51,4 +51,11 @@ dans package.json add
         app.use('/assets',express.static('public'));
         
 
+        diviser page avec footer et header
+        cree dossier dans pages -> includes  -> header.ejs ->footer.ejs
+        <%- include('includes/header'); -%>
+          <h1>Bonjour tous le monde</h1>
+          <p><%= test %></p>
+        <%- include('includes/footer'); -%>
+
 
