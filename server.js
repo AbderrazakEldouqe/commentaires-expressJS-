@@ -33,11 +33,17 @@ app.get('/', (request, response) => {
 
 app.post('/', (request, response) => {
     if (request.body.message === undefined || request.body.message === '') {
-        request.flash('error',"vous n'avez pas entrer un message");
+        request.flash('error', "vous n'avez pas entrer un message");
         response.redirect('/');
-    }else{
-        request.flash('success',"message envoyé");
-        response.redirect('/');
+    } else {
+        let Message = require('./models/message');
+        Message.create(request.body.message, function (result) {
+            request.flash('success', "message envoyé");
+            console.log(result);
+            response.redirect('/');
+        });
+        
+       
     }
 });
 
