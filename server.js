@@ -50,5 +50,14 @@ app.post('/', (request, response) => {
 
     }
 });
+app.get('/message/:id', (request, response) => {
+    let Message = require('./models/message');
+
+    Message.find(request.params.id,(message) => {
+        response.render('pages/messages/show', { message: message });
+
+    });
+
+});
 
 app.listen(8000);

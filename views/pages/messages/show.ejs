@@ -1,0 +1,18 @@
+<%- include('../includes/header'); -%>
+
+<div class="row">
+    <div class="col s6 offset-s3">
+
+        <ul class="collection">
+           
+            <li class="collection-item avatar">
+                <i class="material-icons circle red">play_arrow</i>
+                <span class="title"><small><%- message.created_at.fromNow() -%></small></span>
+                <p><%- message.content -%></p>
+               
+            </li>
+           
+        </ul>
+    </div>
+</div>
+<%- include('../includes/footer'); -%>

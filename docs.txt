@@ -252,6 +252,10 @@ dans package.json add
               constructor(row) {
                   this.row = row;
               }
+              get id()
+              {
+                  return this.row.id;
+              }
               get content() {
                   return this.row.content;
               }
@@ -276,7 +280,48 @@ dans package.json add
             </div>
 
             ******************************
+            show page 
+            app.get('/message/:id', (request, response) => {
+              let Message = require('./models/message');
 
+              Message.find(request.params.id,(message) => {
+                  response.render('pages/messages/show', { message: message });
+
+              });
+
+            });
+
+            static find(id,cb) {
+                connection.query('select * from messages where id=?',
+                    [id], (err, rows) => {
+                        if (err) throw err;
+                        cb(new Message(rows[0]));
+                    });
+            }
+
+            add messages/show.ejs
+
+            <%- include('../includes/header'); -%>
+
+                <div class="row">
+                    <div class="col s6 offset-s3">
+
+                        <ul class="collection">
+                          
+                            <li class="collection-item avatar">
+                                <i class="material-icons circle red">play_arrow</i>
+                                <span class="title"><small><%- message.created_at.fromNow() -%></small></span>
+                                <p><%- message.content -%></p>
+                              
+                            </li>
+                          
+                        </ul>
+                    </div>
+                </div>
+                <%- include('../includes/footer'); -%>
+
+                *******************
+                
 
 
 

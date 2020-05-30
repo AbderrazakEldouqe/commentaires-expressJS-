@@ -5,6 +5,10 @@ class Message {
     constructor(row) {
         this.row = row;
     }
+    get id()
+    {
+        return this.row.id;
+    }
     get content() {
         return this.row.content;
     }
@@ -26,6 +30,13 @@ class Message {
                 cb(rows.map((row) => {
                     return new Message(row);
                 }));
+            });
+    }
+    static find(id,cb) {
+        connection.query('select * from messages where id=?',
+            [id], (err, rows) => {
+                if (err) throw err;
+                cb(new Message(rows[0]));
             });
     }
 }

@@ -19,7 +19,7 @@
         <ul class="collection">
             <% for(message of messages) { %>
             <li class="collection-item avatar">
-                <i class="material-icons circle red">play_arrow</i>
+                <a href="/message/<%- message.id-%>"><i class="material-icons circle red">play_arrow</i></a>
                 <span class="title"><small><%- message.created_at.fromNow() -%></small></span>
                 <p><%- message.content -%></p>
                
