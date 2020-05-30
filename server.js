@@ -27,8 +27,12 @@ app.use(require('./middlewares/flash'));
 
 //Routes
 app.get('/', (request, response) => {
-    console.log(response.locals.flash);
-    response.render('pages/index', { test: 'salut' });
+    let Message = require('./models/message');
+    Message.all((messages) => {
+        response.render('pages/index', { messages: messages });
+
+    });
+
 });
 
 app.post('/', (request, response) => {
@@ -42,8 +46,8 @@ app.post('/', (request, response) => {
             console.log(result);
             response.redirect('/');
         });
-        
-       
+
+
     }
 });
 

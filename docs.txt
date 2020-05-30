@@ -232,6 +232,53 @@ dans package.json add
                 }
             });
 
+            ********************
+            add moment library to format date 
+            npm install --save moment
+            pour translation on a ajouter dans dossier config moment
+            https://momentjs.com/docs/#/i18n/
+            ******************
+            static all(cb) {
+            connection.query('select * from messages order by id desc',
+                [], (err, rows) => {
+                    if (err) throw err;
+                    cb(rows.map((row) => {
+                        return new Message(row);
+                    }));
+                });
+
+              }
+              pour changer format on a ajouter contructeur et getters
+              constructor(row) {
+                  this.row = row;
+              }
+              get content() {
+                  return this.row.content;
+              }
+              get created_at() {
+                  return moment(this.row.created_at);
+              }
+              et dans html
+              <div class="row">
+                <div class="col s6 offset-s3">
+
+                    <ul class="collection">
+                        <% for(message of messages) { %>
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle red">play_arrow</i>
+                            <span class="title"><small><%- message.created_at.fromNow() -%></small></span>
+                            <p><%- message.content -%></p>
+                          
+                        </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+
+            ******************************
+
+
+
 
 
 
