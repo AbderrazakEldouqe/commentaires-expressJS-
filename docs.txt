@@ -12,4 +12,28 @@ dans package.json add
 
 
   installer express : npm install --save express
-  
+
+    premier test code pour express dans server.js
+    let app = require('express')();
+
+    app.get('/', (request, response) => {
+        response.send('salut tous le monde');
+    });
+
+    app.listen(8080);
+
+  installer moteur de template : npm install --save ejs
+
+        let app = require('express')();
+
+        ****>>> app.set('view engine','ejs');
+
+        app.get('/', (request, response) => {
+            ****>>> response.render('pages/index',{test:'salut'});
+        });
+
+        app.listen(8080);
+
+        dans HTML pour afficher variable test :  <%= test %>
+
+        
