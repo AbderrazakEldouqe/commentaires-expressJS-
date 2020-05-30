@@ -59,3 +59,19 @@ dans package.json add
         <%- include('includes/footer'); -%>
 
 
+        add form and input and button sumbit in index.ejs
+        add methode post in server.js
+        app.post('/', (request, response) => {
+         console.log(request.body);
+          });
+
+        pour connaitre request.body dans request post il faut installer body-parser
+        npm install --save body-parser 
+        ajouter dans server.js
+        let bodyParser = require('body-parser');
+        // parse application/x-www-form-urlencoded
+        app.use(bodyParser.urlencoded({ extended: false }));
+        // parse application/json
+        app.use(bodyParser.json());
+
+

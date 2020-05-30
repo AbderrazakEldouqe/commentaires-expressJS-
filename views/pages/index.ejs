@@ -1,13 +1,13 @@
 <%- include('includes/header'); -%>
 <div class="row">
-    <form class="col s6 offset-s3">
+    <form class="col s6 offset-s3" method="POST" action="/">
       <div class="row">
         <div class="input-field col s12">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <textarea id="textarea1" class="materialize-textarea" name="message"></textarea>
           <label for="textarea1">Message</label>
         </div>
       </div>
-      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+      <button class="btn waves-effect waves-light" type="submit" >Submit
         <i class="material-icons right">send</i>
       </button>
     </form>
