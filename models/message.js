@@ -18,7 +18,7 @@ class Message {
     static create(content, cb) {
         connection.query('INSERT INTO messages SET content=? ,created_at=?',
             [content, new Date()], (err, res) => {
-                if (err) throw err;
+                if (err)  {console.log("Mysql Error");throw err;}
                 cb(res);
 
             });
@@ -26,7 +26,7 @@ class Message {
     static all(cb) {
         connection.query('select * from messages order by id desc',
             [], (err, rows) => {
-                if (err) throw err;
+                if (err)  {console.log("Mysql Error");throw err;}
                 cb(rows.map((row) => {
                     return new Message(row);
                 }));
@@ -35,7 +35,7 @@ class Message {
     static find(id,cb) {
         connection.query('select * from messages where id=?',
             [id], (err, rows) => {
-                if (err) throw err;
+                if (err) {console.log("Mysql Error");throw err;}
                 cb(new Message(rows[0]));
             });
     }

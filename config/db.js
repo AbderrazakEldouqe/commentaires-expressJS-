@@ -5,5 +5,8 @@ let connection = mysql.createConnection({
   password : '',
   database : 'nodeJS_messages'
 });
-connection.connect();
+connection.connect((err)=>{
+  if(err) {console.log("connection error");throw err;}
+  else console.log("connection success");
+});
 module.exports = connection;
